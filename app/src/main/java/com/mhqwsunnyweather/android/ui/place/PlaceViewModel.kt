@@ -20,4 +20,11 @@ class PlaceViewModel : ViewModel() {
         searchLiveData.value = query
     }
 
+    //因为仓库层是在主线程中获取数据，所以不用LiveData来观察数据变化
+    fun savePlace(place: Place) = Repository.savePlace(place)
+
+    fun getSavedPlace() = Repository.getSavedPlace()
+
+    fun isSavedPlace() = Repository.isSavedPlace()
+
 }
