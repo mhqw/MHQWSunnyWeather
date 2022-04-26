@@ -22,9 +22,9 @@ object Repository {
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
         val placeResponse = SunnyWeatherNetwork.searchPlaces(query)
         if(placeResponse.status == "ok"){
-            Log.d("ygy","获取地点成功")
             //获得城市数据
             val places = placeResponse.places
+            Log.d("ygy","获取地点成功,共${places.size}个地点")
             Result.success(places)
         }else{
             Log.d("ygy","获取地点失败")
@@ -48,7 +48,8 @@ object Repository {
                 val weather = Weather(realtimeResponse.result.realtime,dailyResponse.result.daily)
                 Result.success(weather)
             }else{
-                Log.d("ygy","获取天气失败")
+                Log.d("ygy","获取天气失败," + "realtime response error is ${realtimeResponse.status}, " +
+                        "daily response status is ${dailyResponse.status}")
                 Result.failure<Weather>(RuntimeException(
                     "realtime response status is ${realtimeResponse.status}" +
                             "daily response status is ${dailyResponse.status}"))

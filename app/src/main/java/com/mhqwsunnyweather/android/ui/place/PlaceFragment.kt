@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mhqwsunnyweather.android.MainActivity
 import com.mhqwsunnyweather.android.R
 import com.mhqwsunnyweather.android.ui.weather.WeatherActivity
 import kotlinx.android.synthetic.main.fragment_place.*
@@ -36,17 +37,17 @@ class PlaceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //如果有存储上次查询的城市信息，则读取加载进入天气详情界面
-        if(viewModel.isSavedPlace()){
-            val place = viewModel.getSavedPlace()
-            val intent = Intent(context, WeatherActivity::class.java).apply {
-                putExtra("location_lat",place.location.lat)
-                putExtra("location_lng",place.location.lng)
-                putExtra("place_name",place.name)
-            }
-            startActivity(intent)
-            activity?.finish()
-            return
-        }
+//        if(activity is MainActivity && viewModel.isSavedPlace()){
+//            val place = viewModel.getSavedPlace()
+//            val intent = Intent(context, WeatherActivity::class.java).apply {
+//                putExtra("location_lat",place.location.lat)
+//                putExtra("location_lng",place.location.lng)
+//                putExtra("place_name",place.name)
+//            }
+//            startActivity(intent)
+//            activity?.finish()
+//            return
+//        }
 
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
